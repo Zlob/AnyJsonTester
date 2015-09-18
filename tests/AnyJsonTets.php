@@ -45,7 +45,7 @@ class AnyJsonTets extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider floatDataProvider
      */
-    public function testSeeJsonLikeFloat($actualArray, $min, $max, $precision, $nullable, $negate)
+    public function testSeeJsonLikeFloat($actualArray, $negate, $min = null, $max = null, $precision = null, $nullable = false)
     {
         $actualString = json_encode($actualArray, true);
         $expectedArray = ['field' => new \AnyJsonTester\Types\AnyFloat($min, $max, $precision, $nullable)];
@@ -55,20 +55,23 @@ class AnyJsonTets extends PHPUnit_Framework_TestCase
     public function floatDataProvider()
     {
         return [
-            [['field' => '5.5'], 4.0, 6.0, null, false, false],
-            [['field' => '5.5'], 4.0, 6.0, 1, false, false],
-            [['field' => null], 4.0, 6.0, null, true, false],
-            [['field' => '3.0'], 4.0, 6.0, null, false, true],
-            [['field' => '7.0'], 4.0, 6.0, null, false, true],
-            [['field' => '5.50'], 4.0, 6.0, 3, false, true],
-            [['field' => 'string'], 4.0, 6.0, null, false, true],
+            [['field' => '5.5'], false],
+            [['field' => '5.5'], false, 4.0],
+            [['field' => '5.5'], false, null, 6.0],
+            [['field' => '5.5'], false, 4.0, 6.0],
+            [['field' => '5.5'], false, 4.0, 6.0, 1],
+            [['field' => '3.0'], true, 4.0, 6.0],
+            [['field' => '7.0'], true, 4.0, 6.0],
+            [['field' => '5.50'], true, 4.0, 6.0, 3],
+            [['field' => 'string'], true, 4.0, 6.0],
+            [['field' => null], false, 4.0, 6.0, null, true],
         ];
     }
 
     /**
      * @dataProvider booleanDataProvider
      */
-    public function testSeeJsonLikeBoolean($actualArray, $strict, $nullable, $negate)
+    public function testSeeJsonLikeBoolean($actualArray, $negate,  $strict = false, $nullable = false )
     {
         $actualString = json_encode($actualArray, true);
         $expectedArray = ['field' => new \AnyJsonTester\Types\AnyBoolean( $strict, $nullable)];
@@ -80,33 +83,60 @@ class AnyJsonTets extends PHPUnit_Framework_TestCase
     {
         return [
 
-            [['field' => '0'], null, null, false],
-            [['field' => '0'], true, null, true],
+            [['field' => '0'], false],
+            [['field' => '0'], true, true],
 
-            [['field' => 'false'], null, null, false],
-            [['field' => 'false'], true, null, false],
+            [['field' => 'false'], false],
+            [['field' => 'false'], false, true],
 
-            [['field' => 'off'], null, null, false],
-            [['field' => 'off'], true, null, true],
+            [['field' => 'off'], false],
+            [['field' => 'off'], true, true],
 
-            [['field' => 'no'], null, null, false],
-            [['field' => 'no'], true, null, true],
+            [['field' => 'no'], false],
+            [['field' => 'no'], true, true],
 
-            [['field' => '1'], null, null, false],
-            [['field' => '1'], true, null, true],
+            [['field' => '1'], false],
+            [['field' => '1'], true, true, ],
 
-            [['field' => 'true'], null, null, false],
-            [['field' => 'true'], true, null, false],
+            [['field' => 'true'], false],
+            [['field' => 'true'], false, true],
 
-            [['field' => 'on'], null, null, false],
-            [['field' => 'on'], true, null, true],
+            [['field' => 'on'], false],
+            [['field' => 'on'], true, true],
 
-            [['field' => 'yes'], null, null, false],
-            [['field' => 'yes'], true, null, true],
+            [['field' => 'yes'], false],
+            [['field' => 'yes'], true, true],
 
-            [['field' => null], null, true, false],
-            [['field' => null], null, false, true],
-            [['field' => null], true, false, true],
+            [['field' => null], false, false, true],
+            [['field' => null], true, false, false],
+            [['field' => null], true, true, false],
+        ];
+    }
+
+    /**
+     * @dataProvider stringDataProvider
+     */
+    public function testSeeJsonLikeString($actualArray, $negate, $min = false, $max = false, $regexp = null, $nullable = false)
+    {
+        $actualString = json_encode($actualArray, true);
+        $expectedArray = ['field' => new \AnyJsonTester\Types\AnyString( $min, $max, $regexp, $nullable)];
+        static::seeJsonLike($actualString, $expectedArray, $negate);
+
+    }
+
+    public function stringDataProvider()
+    {
+        return [
+            [['field' => 'string'], false],
+            [['field' => 'string'], false, 2],
+            [['field' => 'string'], false, null, 10],
+            [['field' => 'string'], false, 2, 10],
+            [['field' => null], false, null, null, null, true],
+            [['field' => 'string'], false, null, null, '/rin/'],
+            [['field' => null], true, null, null, null, false],
+            [['field' => ''], true, 2],
+            [['field' => 'stringstring'], true, null, 10],
+            [['field' => 'string'], true, null, null, '/gring/'],
         ];
     }
 
