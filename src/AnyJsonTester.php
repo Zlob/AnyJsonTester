@@ -11,7 +11,8 @@ trait AnyJsonTester {
         foreach($expected as $key => $value){
             if(array_key_exists($key, $actual)){
                 if(is_object($value)){
-                    $value->check($actual[$key], $negate);
+                    $checkResult = $value->check($actual[$key], $negate);
+                    $this->$method($checkResult['passed'], "Key '$key' ".$checkResult['message']." within ".json_encode($actual));
                 }
                 else{
                     $this->$method($actual[$key] === $value, "Unable to find value '$value' within ".json_encode($actual));
