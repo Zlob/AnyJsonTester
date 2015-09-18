@@ -1,5 +1,29 @@
 {
-    "require-dev": {
-        "phpunit/phpunit": "4.8.*"
+  "name": "zlob/AnyJsonTester",
+  "type": "library",
+  "description": "Help to test JSON with changeable values, like timestamps, count etc",
+  "keywords": [
+    "json",
+    "test",
+    "REST API",
+    "RESTful API",
+    "testing"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Makin Vladislav",
+      "email": "vamakin@gmail.com",
+      "homepage": "https://github.com/Zlob",
+      "role": "Developer"
     }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AnyJsonTester\\": "src/"
+    }
+  }
 }
