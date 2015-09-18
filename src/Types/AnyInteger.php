@@ -14,7 +14,7 @@ class AnyInteger implements AbstractType{
     private $max;
     private $nullable;
 
-    function __construct($min = null, $max = null, $nullable = false)
+    public function __construct($min = null, $max = null, $nullable = false)
     {
         $this->min = $min;
         $this->max = $max;

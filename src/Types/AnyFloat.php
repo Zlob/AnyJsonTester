@@ -15,7 +15,7 @@ class AnyFloat implements AbstractType{
     private $precision;
     private $nullable;
 
-    function __construct($min = null, $max = null, $precision = null, $nullable = false)
+    public function __construct($min = null, $max = null, $precision = null, $nullable = false)
     {
         $this->min = $min;
         $this->max = $max;

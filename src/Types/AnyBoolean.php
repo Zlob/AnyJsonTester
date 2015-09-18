@@ -13,7 +13,7 @@ class AnyBoolean implements AbstractType{
     private $strict;
     private $nullable;
 
-    function __construct($strict = false, $nullable = false)
+    public function __construct($strict = false, $nullable = false)
     {
         $this->strict = $strict;
         $this->nullable = $nullable;
