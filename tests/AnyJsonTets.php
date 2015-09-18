@@ -21,6 +21,19 @@ class AnyJsonTets extends PHPUnit_Framework_TestCase
         static::seeJsonLike($actualString, $expectedArray, true);
     }
 
+    public function testSeeJsonLikeInteger()
+    {
+        $actualArray = ['field' => 5];
+        $actualString = json_encode($actualArray, true);
+        $expectedArray = ['field' => new \AnyJsonTester\Types\AnyInteger(4, 6)];
+        static::seeJsonLike($actualString, $expectedArray);
+
+        $actualArray = ['field' => null];
+        $actualString = json_encode($actualArray, true);
+        $expectedArray = ['field' => new \AnyJsonTester\Types\AnyInteger(4, 6, true)];
+        static::seeJsonLike($actualString, $expectedArray);
+    }
+
 
 
 }
