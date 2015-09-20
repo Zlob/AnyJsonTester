@@ -1,6 +1,5 @@
 <?php
 
-
 class AnyArrayTest extends PHPUnit_Framework_TestCase
 {
 

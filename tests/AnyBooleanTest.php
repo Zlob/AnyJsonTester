@@ -1,6 +1,5 @@
 <?php
 
-
 class AnyBooleanTest extends PHPUnit_Framework_TestCase
 {
 

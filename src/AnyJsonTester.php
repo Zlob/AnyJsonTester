@@ -4,6 +4,14 @@ namespace AnyJsonTester;
 
 
 trait AnyJsonTester {
+
+    /**
+     * Assert that json matches pattern
+     * @param string $actual
+     * @param AnyObject|AnyArray $expected
+     * @param bool $negate
+     * @return $this
+     */
     public function seeJsonLike($actual, $expected, $negate = false )
     {
         $method = $negate ? 'assertFalse' : 'assertTrue';
@@ -12,4 +20,5 @@ trait AnyJsonTester {
         $this->$method( $checkResult['passed'], $checkResult['message'] );
         return $this;
     }
+
 }

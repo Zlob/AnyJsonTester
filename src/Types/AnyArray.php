@@ -2,19 +2,41 @@
 
 namespace AnyJsonTester\Types;
 
-
+/**
+ * Class AnyArray
+ * @package AnyJsonTester\Types
+ */
 class AnyArray implements AbstractType
 {
+    /**
+     * minimum array length, null if no restrictions
+     * @var null | int
+     */
     private $min;
+
+    /**
+     * maximum array length, null if no restrictions
+     * @var null | int
+     */
     private $max;
+
+    /**
+     * defines array element structure
+     * @var AnyObject
+     */
     private $expectedElement;
+
+    /**
+     * defines if array can be null
+     * @var bool
+     */
     private $nullable;
 
     /**
-     * @param AnyObject $expectedElement
-     * @param null $min
-     * @param null $max
-     * @param bool $nullable
+     * @param AnyObject $expectedElement - defines array element structure
+     * @param null | int $min - minimum array length, null if no restrictions
+     * @param null | int $max - maximum array length, null if no restrictions
+     * @param bool $nullable - defines if array can be null
      */
     public function __construct(AnyObject $expectedElement, $min = null, $max = null, $nullable = false)
     {
@@ -24,6 +46,11 @@ class AnyArray implements AbstractType
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $value
+     * @return array
+     */
     public function check($value)
     {
         $checkResult = ['passed' => true, 'message' => 'has value'];
@@ -52,6 +79,12 @@ class AnyArray implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * check that all array elements matches expectedElement
+     * @param $value
+     * @param $checkResult
+     * @return array
+     */
     private function checkArray($value, $checkResult)
     {
         foreach ($value as $index => $item) {

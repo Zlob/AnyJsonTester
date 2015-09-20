@@ -9,12 +9,42 @@
 namespace AnyJsonTester\Types;
 
 
+/**
+ * Class AnyString
+ * @package AnyJsonTester\Types
+ */
 class AnyString implements AbstractType{
+
+    /**
+     * minimum string length, null if no restrictions
+     * @var null | int
+     */
     private $min;
+
+    /**
+     * maximum string length, null if no restrictions
+     * @var null | int
+     */
     private $max;
+
+    /**
+     * string regex pattern, null if no restrictions
+     * @var null | string
+     */
     private $regex;
+
+    /**
+     * defines if value can be null
+     * @var bool
+     */
     private $nullable;
 
+    /**
+     * @param null $min | int - minimum string length, null if no restrictions
+     * @param null $max | int - maximum string length, null if no restrictions
+     * @param null $regex | string - string regex pattern, null if no restrictions
+     * @param bool $nullable - defines if value can be null
+     */
     function __construct($min = null, $max = null, $regex = null, $nullable = false)
     {
         $this->min = $min;
@@ -23,6 +53,11 @@ class AnyString implements AbstractType{
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $value
+     * @return array
+     */
     public function check($value)
     {
         $checkResult = ['passed' => true, 'message' => "has value '$value'"];

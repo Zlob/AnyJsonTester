@@ -9,13 +9,42 @@
 namespace AnyJsonTester\Types;
 
 
+/**
+ * Class AnyObject
+ * @package AnyJsonTester\Types
+ */
 class AnyObject implements AbstractType
 {
+    /**
+     * expected fields array
+     * @var array
+     */
     private $hasFields;
+
+    /**
+     * unexpected fields array
+     * @var array
+     */
     private $hasNoFields;
+
+    /**
+     * strict mode - if true, value must contain only fields, described in hasFields param
+     * @var bool
+     */
     private $strictMode;
+
+    /**
+     * defines if value can be null
+     * @var bool
+     */
     private $nullable;
 
+    /**
+     * @param array $hasFields - expected fields array
+     * @param array $hasNoFields - unexpected fields array
+     * @param bool $strictMode - if true, value must contain only fields, described in hasFields param
+     * @param bool $nullable - defines if value can be null
+     */
     public function __construct(array $hasFields = [], array $hasNoFields = [], $strictMode = false, $nullable = false)
     {
         $this->hasFields = $hasFields;
@@ -24,6 +53,11 @@ class AnyObject implements AbstractType
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $actual
+     * @return array
+     */
     public function check($actual)
     {
         $checkResult = ['passed' => true, 'message' => 'has value'];
@@ -53,6 +87,11 @@ class AnyObject implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * check object is null
+     * @param $checkResult
+     * @return mixed
+     */
     private function checkNullable($checkResult)
     {
         $checkResult['message'] = 'Object is null';
@@ -64,6 +103,12 @@ class AnyObject implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * check that array has fields
+     * @param $actual
+     * @param $checkResult
+     * @return mixed
+     */
     private function checkHasFields($actual, $checkResult)
     {
         foreach ($this->hasFields as $expectedKey => $expectedValue) {
@@ -87,6 +132,12 @@ class AnyObject implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * check that array has  no fields
+     * @param $actual
+     * @param $checkResult
+     * @return mixed
+     */
     private function checkHasNoFields($actual, $checkResult)
     {
         foreach ($this->hasNoFields as $unexpected) {
@@ -99,6 +150,12 @@ class AnyObject implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * check strict mode
+     * @param $actual
+     * @param $checkResult
+     * @return mixed
+     */
     private function checkStrictMode($actual, $checkResult)
     {
         $diff = array_diff_key($actual, $this->hasFields);

@@ -1,25 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zloblin
- * Date: 18.09.2015
- * Time: 15:16
- */
 
 namespace AnyJsonTester\Types;
 
-
+/**
+ * Class AnyBoolean
+ * @package AnyJsonTester\Types
+ */
 class AnyBoolean implements AbstractType
 {
+    /**
+     * if true - use strict mode - only 'true' and 'false' strings are boolean
+     * @var bool
+     */
     private $strictMode;
+
+    /**
+     * defines if value can be null
+     * @var bool
+     */
     private $nullable;
 
+    /**
+     * @param bool $strictMode - if true - only 'true' and 'false' strings are boolean
+     * @param bool $nullable  - if true - value can be null
+     */
     public function __construct($strictMode = false, $nullable = false)
     {
         $this->strictMode = $strictMode;
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $value
+     * @return array
+     */
     public function check($value)
     {
         $checkResult = ['passed' => true, 'message' => "has value '$value'"];
@@ -36,6 +51,11 @@ class AnyBoolean implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * Check if value is boolean
+     * @param $value
+     * @return bool
+     */
     private function checkIsBoolean($value)
     {
         if ($this->strictMode) {
@@ -45,6 +65,11 @@ class AnyBoolean implements AbstractType
         }
     }
 
+    /**
+     * Check if value is boolean in strict mode
+     * @param $value
+     * @return bool
+     */
     private function checkStrict($value)
     {
         if ($value === 'true' or $value === 'false') {
@@ -54,6 +79,11 @@ class AnyBoolean implements AbstractType
         }
     }
 
+    /**
+     * Check if value is boolean in non strict mode
+     * @param $value
+     * @return bool
+     */
     private function checkNotStrict($value)
     {
         if (filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) !== null) {

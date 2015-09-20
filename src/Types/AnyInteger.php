@@ -1,19 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zloblin
- * Date: 18.09.2015
- * Time: 15:16
- */
 
 namespace AnyJsonTester\Types;
 
-
+/**
+ * Class AnyInteger
+ * @package AnyJsonTester\Types
+ */
 class AnyInteger implements AbstractType{
+
+    /**
+     * minimum integer value, null if no restrictions
+     * @var null | int
+     */
     private $min;
+
+    /**
+     * maximum integer value, null if no restrictions
+     * @var null | int
+     */
     private $max;
+
+    /**
+     * defines if value can be null
+     * @var bool
+     */
     private $nullable;
 
+    /**
+     * @param null | int $min - minimum integer value, null if no restrictions
+     * @param null | int $max - maximum integer value, null if no restrictions
+     * @param bool $nullable - defines if value can be null
+     */
     public function __construct($min = null, $max = null, $nullable = false)
     {
         $this->min = $min;
@@ -21,6 +38,11 @@ class AnyInteger implements AbstractType{
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $value
+     * @return array
+     */
     public function check($value)
     {
         $checkResult = ['passed' => true, 'message' => "has value '$value'"];

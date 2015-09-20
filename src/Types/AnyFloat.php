@@ -1,21 +1,43 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zloblin
- * Date: 18.09.2015
- * Time: 15:16
- */
 
 namespace AnyJsonTester\Types;
 
-
+/**
+ * Class AnyFloat
+ * @package AnyJsonTester\Types
+ */
 class AnyFloat implements AbstractType
 {
+    /**
+     * minimum float value, null if no restrictions
+     * @var null | float
+     */
     private $min;
+
+    /**
+     * minimum float value, null if no restrictions
+     * @var null | float
+     */
     private $max;
+
+    /**
+     * minimum float value, null if no restrictions
+     * @var null | int
+     */
     private $precision;
+
+    /**
+     * defines if value can be null
+     * @var bool
+     */
     private $nullable;
 
+    /**
+     * @param null | float $min - minimum float value, null if no restrictions
+     * @param null | float $max - minimum float value, null if no restrictions
+     * @param null | int $precision - minimum float value, null if no restrictions
+     * @param bool $nullable - defines if value can be null
+     */
     public function __construct($min = null, $max = null, $precision = null, $nullable = false)
     {
         $this->min = $min;
@@ -24,6 +46,11 @@ class AnyFloat implements AbstractType
         $this->nullable = $nullable;
     }
 
+    /**
+     * Check if value matches restrictions
+     * @param $value
+     * @return array
+     */
     public function check($value)
     {
         $checkResult = ['passed' => true, 'message' => "has value '$value'"];
@@ -49,6 +76,11 @@ class AnyFloat implements AbstractType
         return $checkResult;
     }
 
+    /**
+     * Return precision of float
+     * @param $value
+     * @return int
+     */
     private function getPrecision($value)
     {
         return strlen(substr(strrchr($value, "."), 1));
