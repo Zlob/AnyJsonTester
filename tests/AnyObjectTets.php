@@ -48,7 +48,7 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testAnyObjectHasNoFieldsPassed($actual, $expected)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([],$expected);
+        $expected = new \AnyJsonTester\Types\AnyObject([], $expected);
         $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
@@ -66,7 +66,7 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
      */
     public function testAnyObjectHasNoFieldsFailed($actual, $expected)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([],$expected);
+        $expected = new \AnyJsonTester\Types\AnyObject([], $expected);
         $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }

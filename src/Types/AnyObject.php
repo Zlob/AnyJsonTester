@@ -29,24 +29,24 @@ class AnyObject implements AbstractType
         $checkResult = ['passed' => true, 'message' => 'has value'];
 
         //check object is null
-        if($actual === null){
+        if ($actual === null) {
             return $this->checkNullable($checkResult);
         }
 
         //check that array has fields
         $checkResult = $this->checkHasFields($actual, $checkResult);
-        if(!$checkResult['passed']){
+        if (!$checkResult['passed']) {
             return $checkResult;
         }
 
         //check that array has  no fields
         $checkResult = $this->checkHasNoFields($actual, $checkResult);
-        if(!$checkResult['passed']){
+        if (!$checkResult['passed']) {
             return $checkResult;
         }
 
         //check strict mode
-        if($this->strictMode){
+        if ($this->strictMode) {
             $checkResult = $this->checkStrictMode($actual, $checkResult);
         }
 
@@ -58,8 +58,7 @@ class AnyObject implements AbstractType
         $checkResult['message'] = 'Object is null';
         if ($this->nullable) {
             $checkResult['passed'] = true;
-        }
-        else {
+        } else {
             $checkResult['passed'] = false;
         }
         return $checkResult;
@@ -103,9 +102,9 @@ class AnyObject implements AbstractType
     private function checkStrictMode($actual, $checkResult)
     {
         $diff = array_diff_key($actual, $this->hasFields);
-        if(count($diff) !== 0){
+        if (count($diff) !== 0) {
             $checkResult['passed'] = false;
-            $checkResult['message'] = 'Object has keys '.json_encode($diff);
+            $checkResult['message'] = 'Object has keys ' . json_encode($diff);
         }
         return $checkResult;
     }
