@@ -2,6 +2,7 @@
 
 namespace AnyJsonTester\Types;
 
-interface AbstractType {
+interface AbstractType
+{
     public function check($value);
 }
