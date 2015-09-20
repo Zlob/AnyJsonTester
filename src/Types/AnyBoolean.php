@@ -11,12 +11,12 @@ namespace AnyJsonTester\Types;
 
 class AnyBoolean implements AbstractType
 {
-    private $strict;
+    private $strictMode;
     private $nullable;
 
-    public function __construct($strict = false, $nullable = false)
+    public function __construct($strictMode = false, $nullable = false)
     {
-        $this->strict = $strict;
+        $this->strictMode = $strictMode;
         $this->nullable = $nullable;
     }
 
