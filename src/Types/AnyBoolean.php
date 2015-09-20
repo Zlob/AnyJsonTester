@@ -9,7 +9,8 @@
 namespace AnyJsonTester\Types;
 
 
-class AnyBoolean implements AbstractType{
+class AnyBoolean implements AbstractType
+{
     private $strict;
     private $nullable;
 
@@ -39,19 +40,16 @@ class AnyBoolean implements AbstractType{
     {
         if ($this->strict) {
             return $this->checkStrict($value);
-        }
-        else {
+        } else {
             return $this->checkNotStrict($value);
         }
     }
 
     private function checkStrict($value)
     {
-        if($value ==='true' or $value ==='false')
-        {
+        if ($value === 'true' or $value === 'false') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -60,8 +58,7 @@ class AnyBoolean implements AbstractType{
     {
         if (filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) !== null) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
