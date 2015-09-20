@@ -7,10 +7,10 @@ class AnyBooleanTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider booleanDataProviderPassed
      */
-    public function testAnyBooleanPassed($actualArray, $strict = false, $nullable = false)
+    public function testAnyBooleanPassed($actual, $strict = false, $nullable = false)
     {
         $expected = new \AnyJsonTester\Types\AnyBoolean($strict, $nullable);
-        $checkResult = $expected->check($actualArray);
+        $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
 
@@ -39,10 +39,10 @@ class AnyBooleanTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider booleanDataProviderFailed
      */
-    public function testAnyBooleanFailed($actualArray, $strict = false, $nullable = false)
+    public function testAnyBooleanFailed($actual, $strict = false, $nullable = false)
     {
         $expected = new \AnyJsonTester\Types\AnyBoolean($strict, $nullable);
-        $checkResult = $expected->check($actualArray);
+        $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }
 
