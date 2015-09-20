@@ -38,7 +38,7 @@ class AnyBoolean implements AbstractType
 
     private function checkIsBoolean($value)
     {
-        if ($this->strict) {
+        if ($this->strictMode) {
             return $this->checkStrict($value);
         } else {
             return $this->checkNotStrict($value);
