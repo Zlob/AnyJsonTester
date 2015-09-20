@@ -3,6 +3,9 @@
 namespace AnyJsonTester;
 
 
+use AnyJsonTester\Types\AnyArray;
+use AnyJsonTester\Types\AnyObject;
+
 trait AnyJsonTester {
 
     /**
