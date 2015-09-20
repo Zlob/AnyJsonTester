@@ -9,7 +9,8 @@
 namespace AnyJsonTester\Types;
 
 
-class AnyFloat implements AbstractType{
+class AnyFloat implements AbstractType
+{
     private $min;
     private $max;
     private $precision;
