@@ -93,3 +93,7 @@ Lets test JSON like
 ```
 
 ## Some sugar for Laravel
+
+## License
+
+MIT - [Zlob](https://github.com/zlob)
