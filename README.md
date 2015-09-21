@@ -92,8 +92,12 @@ Lets test JSON like
     }
 ```
 
-## Some sugar for Laravel
-
+## Some sugar for Laravel 5.1
+In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTestertrait, so you can chain seeJsonLike method with request metods, like 
+```
+$this->post('/user', ['name' => 'Sally'])
+     ->seeJsonLike( new AnyObject( [ 'name' => AnyJsonString() ] ) );
+```
 ## License
 
 MIT - [Zlob](https://github.com/zlob)
