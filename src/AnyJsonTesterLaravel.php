@@ -24,3 +24,4 @@ trait AnyJsonTesterLaravel {
     }
 
 }
+
