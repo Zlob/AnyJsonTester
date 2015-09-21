@@ -7,9 +7,9 @@ class AnyStringTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider StringDataProviderPassed
      */
-    public function testAnyStringPassed($actual, $min = null, $max = null, $regex = null, $nullable = false)
+    public function testAnyStringPassed($actual, $options = [])
     {
-        $expected = new \AnyJsonTester\Types\AnyString($min, $max, $regex, $nullable);
+        $expected = new \AnyJsonTester\Types\AnyString($options);
         $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
@@ -18,20 +18,20 @@ class AnyStringTest extends PHPUnit_Framework_TestCase
     {
         return [
             ['string'],
-            ['string', 2],
-            ['string', null, 10],
-            ['string', 2, 10],
-            [null, null, null, null, true],
-            ['string', null, null, '/rin/'],
+            ['string', ['min' => 2]],
+            ['string', ['max' => 10]],
+            ['string', ['min' => 2, 'max' => 10]],
+            [null, ['nullable' => true]],
+            ['string', ['regex' => '/rin/']],
         ];
     }
 
     /**
      * @dataProvider StringDataProviderFailed
      */
-    public function testAnyStringFailed($actual, $min = null, $max = null, $regex = null, $nullable = false)
+    public function testAnyStringFailed($actual, $options = [])
     {
-        $expected = new \AnyJsonTester\Types\AnyString($min, $max, $regex, $nullable);
+        $expected = new \AnyJsonTester\Types\AnyString($options);
         $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }
@@ -39,10 +39,10 @@ class AnyStringTest extends PHPUnit_Framework_TestCase
     public function StringDataProviderFailed()
     {
         return [
-            [null, null, null, null, false],
-            ['', 2],
-            ['stringstring', null, 10],
-            ['string', null, null, '/gring/'],
+            [null],
+            ['', ['min' => 2]],
+            ['stringstring', ['max' => 10]],
+            ['string', ['regex' => '/grin/']],
         ];
     }
 

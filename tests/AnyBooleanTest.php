@@ -6,9 +6,9 @@ class AnyBooleanTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider booleanDataProviderPassed
      */
-    public function testAnyBooleanPassed($actual, $strict = false, $nullable = false)
+    public function testAnyBooleanPassed($actual, $options = [])
     {
-        $expected = new \AnyJsonTester\Types\AnyBoolean($strict, $nullable);
+        $expected = new \AnyJsonTester\Types\AnyBoolean($options);
         $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
@@ -16,31 +16,31 @@ class AnyBooleanTest extends PHPUnit_Framework_TestCase
     public function booleanDataProviderPassed()
     {
         return [
-            ['0', false, false],
-            ['1', false, false],
+            ['0', ['strictMode' => false, 'nullable' => false ]],
+            ['1', ['strictMode' => false, 'nullable' => false ]],
 
-            ['off', false, false],
-            ['on', false, false],
+            ['off', ['strictMode' => false, 'nullable' => false ]],
+            ['on', ['strictMode' => false, 'nullable' => false ]],
 
-            ['no', false, false],
-            ['yes', false, false],
+            ['no', ['strictMode' => false, 'nullable' => false ]],
+            ['yes', ['strictMode' => false, 'nullable' => false ]],
 
-            ['true', false, false],
-            ['false', false, false],
+            ['true', ['strictMode' => false, 'nullable' => false ]],
+            ['false', ['strictMode' => false, 'nullable' => false ]],
 
-            ['true', true, false],
-            ['false', true, false],
+            ['true', ['strictMode' => true, 'nullable' => false ]],
+            ['false', ['strictMode' => true, 'nullable' => false ]],
 
-            [null, false, true],
+            [null, ['strictMode' => false, 'nullable' => true ]],
         ];
     }
 
     /**
      * @dataProvider booleanDataProviderFailed
      */
-    public function testAnyBooleanFailed($actual, $strict = false, $nullable = false)
+    public function testAnyBooleanFailed($actual, $options = [])
     {
-        $expected = new \AnyJsonTester\Types\AnyBoolean($strict, $nullable);
+        $expected = new \AnyJsonTester\Types\AnyBoolean($options);
         $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }
@@ -48,16 +48,16 @@ class AnyBooleanTest extends PHPUnit_Framework_TestCase
     public function booleanDataProviderFailed()
     {
         return [
-            ['0', true, false],
-            ['1', true, false],
+            ['0', ['strictMode' => true, 'nullable' => false ]],
+            ['1', ['strictMode' => true, 'nullable' => false ]],
 
-            ['off', true, false],
-            ['on', true, false],
+            ['off', ['strictMode' => true, 'nullable' => false ]],
+            ['on', ['strictMode' => true, 'nullable' => false ]],
 
-            ['no', true, false],
-            ['yes', true, false],
+            ['no', ['strictMode' => true, 'nullable' => false ]],
+            ['yes', ['strictMode' => true, 'nullable' => false ]],
 
-            [null, false, false],
+            [null, ['strictMode' => true, 'nullable' => false ]],
         ];
     }
 

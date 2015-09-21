@@ -24,18 +24,19 @@ class AnyInteger implements AbstractType{
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param null | int $min - minimum integer value, null if no restrictions
-     * @param null | int $max - maximum integer value, null if no restrictions
-     * @param bool $nullable - defines if value can be null
+     * @param array $options
+     * min - int, minimum integer value
+     * max - int, maximum integer value
+     * nullable - bool, defines if value can be null
      */
-    public function __construct($min = null, $max = null, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->min = $min;
-        $this->max = $max;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

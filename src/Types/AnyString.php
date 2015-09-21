@@ -37,20 +37,20 @@ class AnyString implements AbstractType{
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param null $min | int - minimum string length, null if no restrictions
-     * @param null $max | int - maximum string length, null if no restrictions
-     * @param null $regex | string - string regex pattern, null if no restrictions
-     * @param bool $nullable - defines if value can be null
+     * @param array $options
+     * hash min - int, minimum string length
+     * hash max - int, maximum string length
+     * hash regex -  string,  regex pattern
+     * hash nullable - boolean, defines if value can be null
      */
-    function __construct($min = null, $max = null, $regex = null, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->min = $min;
-        $this->max = $max;
-        $this->regex = $regex;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

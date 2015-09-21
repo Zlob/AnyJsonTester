@@ -12,22 +12,24 @@ class AnyBoolean implements AbstractType
      * if true - use strict mode - only 'true' and 'false' strings are boolean
      * @var bool
      */
-    private $strictMode;
+    private $strictMode = false;
 
     /**
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param bool $strictMode - if true - only 'true' and 'false' strings are boolean
-     * @param bool $nullable  - if true - value can be null
+     * @param array $options
+     * hash strictMode - bool, if true - only 'true' and 'false' strings are boolean
+     * hash nullable - bool, if true - value can be null
      */
-    public function __construct($strictMode = false, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->strictMode = $strictMode;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

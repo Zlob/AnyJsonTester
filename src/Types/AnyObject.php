@@ -19,38 +19,38 @@ class AnyObject implements AbstractType
      * expected fields array
      * @var array
      */
-    private $hasFields;
+    private $hasFields = [];
 
     /**
      * unexpected fields array
      * @var array
      */
-    private $hasNoFields;
+    private $hasNoFields = [];
 
     /**
      * strict mode - if true, value must contain only fields, described in hasFields param
      * @var bool
      */
-    private $strictMode;
+    private $strictMode = false;
 
     /**
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param array $hasFields - expected fields array
-     * @param array $hasNoFields - unexpected fields array
-     * @param bool $strictMode - if true, value must contain only fields, described in hasFields param
-     * @param bool $nullable - defines if value can be null
+     * @param array $options
+     * hash hasFields - array, expected fields array
+     * hash hasNoFields - array, unexpected fields array
+     * hash strictMode - bool, if true, value must contain only fields, described in hasFields param
+     * hash nullable - bool, defines if value can be null
      */
-    public function __construct(array $hasFields = [], array $hasNoFields = [], $strictMode = false, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->hasFields = $hasFields;
-        $this->hasNoFields = $hasNoFields;
-        $this->strictMode = $strictMode;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

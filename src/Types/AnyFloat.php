@@ -30,20 +30,20 @@ class AnyFloat implements AbstractType
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param null | float $min - minimum float value, null if no restrictions
-     * @param null | float $max - minimum float value, null if no restrictions
-     * @param null | int $precision - minimum float value, null if no restrictions
-     * @param bool $nullable - defines if value can be null
+     * @param array $options
+     * hash min - float, minimum float value
+     * hash max - float, minimum float value
+     * hash precision - int, minimum float value
+     * hash nullable - bool, defines if value can be null
      */
-    public function __construct($min = null, $max = null, $precision = null, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->min = $min;
-        $this->max = $max;
-        $this->precision = $precision;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

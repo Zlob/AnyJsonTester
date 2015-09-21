@@ -7,9 +7,9 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider hasFieldsPassedDataProvider
      */
-    public function testAnyObjectHasFieldsPassed($actual, $expected)
+    public function testAnyObjectHasFieldsPassed($actual, $options)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject($expected);
+        $expected = new \AnyJsonTester\Types\AnyObject($options);
         $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
@@ -18,17 +18,17 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
     public function hasFieldsPassedDataProvider()
     {
         return [
-            [['field' => 'value'], ['field' => 'value']],
-            [['field' => 'value'], ['field' => new \AnyJsonTester\Types\AnyString()]],
+            [['field' => 'value'], ['hasFields' => ['field' => 'value']] ],
+            [['field' => 'value'], ['hasFields' => ['field' => new \AnyJsonTester\Types\AnyString()]]],
         ];
     }
 
     /**
      * @dataProvider hasFieldsFailedDataProvider
      */
-    public function testAnyObjectHasFieldsFailed($actual, $expected)
+    public function testAnyObjectHasFieldsFailed($actual, $options)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject($expected);
+        $expected = new \AnyJsonTester\Types\AnyObject($options);
         $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }
@@ -37,18 +37,18 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
     public function hasFieldsFailedDataProvider()
     {
         return [
-            [['field' => 'value'], ['unknownField' => 'value']],
-            [['field' => 'value'], ['field' => 'unknownValue']],
-            [['field' => 'value'], ['field' => new \AnyJsonTester\Types\AnyInteger()]],
+            [['field' => 'value'], ['hasFields' => ['unknownField' => 'value']]],
+            [['field' => 'value'], ['hasFields' => ['field' => 'unknownValue']]],
+            [['field' => 'value'], ['hasFields' => ['field' => new \AnyJsonTester\Types\AnyInteger()]]],
         ];
     }
 
     /**
      * @dataProvider hasNoFieldsPassedDataProvider
      */
-    public function testAnyObjectHasNoFieldsPassed($actual, $expected)
+    public function testAnyObjectHasNoFieldsPassed($actual, $options)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([], $expected);
+        $expected = new \AnyJsonTester\Types\AnyObject($options);
         $checkResult = $expected->check($actual);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
@@ -57,16 +57,16 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
     public function hasNoFieldsPassedDataProvider()
     {
         return [
-            [['field' => 'value'], ['password']],
+            [['field' => 'value'], ['hasNoFields' => ['password']]],
         ];
     }
 
     /**
      * @dataProvider hasNoFieldsFailedDataProvider
      */
-    public function testAnyObjectHasNoFieldsFailed($actual, $expected)
+    public function testAnyObjectHasNoFieldsFailed($actual, $options)
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([], $expected);
+        $expected = new \AnyJsonTester\Types\AnyObject($options);
         $checkResult = $expected->check($actual);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }
@@ -75,20 +75,20 @@ class AnyObjectTest extends PHPUnit_Framework_TestCase
     public function hasNoFieldsFailedDataProvider()
     {
         return [
-            [['field' => 'value'], ['field']],
+            [['field' => 'value'], ['hasFields' => ['field']]],
         ];
     }
 
     public function testAnyObjectNullablePassed()
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([], [], false, true);
+        $expected = new \AnyJsonTester\Types\AnyObject(['nullable' => true]);
         $checkResult = $expected->check(null);
         static::assertTrue($checkResult['passed'], $checkResult['message']);
     }
 
     public function testAnyObjectNullableFailed()
     {
-        $expected = new \AnyJsonTester\Types\AnyObject([], [], false, false);
+        $expected = new \AnyJsonTester\Types\AnyObject(['nullable' => false]);
         $checkResult = $expected->check(null);
         static::assertFalse($checkResult['passed'], $checkResult['message']);
     }

@@ -10,7 +10,7 @@ class AnyJsonTest extends PHPUnit_Framework_TestCase
         $actualArray = ['field' => 'value'];
         $actualString = json_encode($actualArray, true);
         $expectedArray = $actualArray;
-        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject($expectedArray), false);
+        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), false);
     }
 
     public function testSeeJsonLikeUnableFindValue()
@@ -18,7 +18,7 @@ class AnyJsonTest extends PHPUnit_Framework_TestCase
         $actualArray = ['field' => 'value'];
         $actualString = json_encode($actualArray, true);
         $expectedArray = ['field' => 'faild value'];
-        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject($expectedArray), true);
+        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), true);
     }
 
 
@@ -27,7 +27,7 @@ class AnyJsonTest extends PHPUnit_Framework_TestCase
         $actualArray = ['field' => 'value'];
         $actualString = json_encode($actualArray, true);
         $expectedArray = ['unknown field' => 'faild value'];
-        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject($expectedArray), true);
+        static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), true);
     }
 
 

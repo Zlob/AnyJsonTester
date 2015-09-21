@@ -30,20 +30,20 @@ class AnyDateTime implements AbstractType{
      * defines if value can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
-     * @param null | string $min - minimum date/time value, null if no restrictions
-     * @param null | string $max - maximum date/time value, null if no restrictions
-     * @param null | string $format - DateTime format, null if no restrictions
-     * @param bool $nullable - if true - value can be null
+     * @param array $options
+     * hash min - string, minimum date/time value
+     * hash max - string, maximum date/time value
+     * hash format - string, DateTime format
+     * hash nullable - bool, if true - value can be null
      */
-    public function __construct($min = null, $max = null, $format = null, $nullable = false)
+    function __construct( array $options = [] )
     {
-        $this->min = $min;
-        $this->max = $max;
-        $this->format = $format;
-        $this->nullable = $nullable;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
     }
 
     /**

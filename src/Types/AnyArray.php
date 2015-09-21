@@ -30,20 +30,21 @@ class AnyArray implements AbstractType
      * defines if array can be null
      * @var bool
      */
-    private $nullable;
+    private $nullable = false;
 
     /**
      * @param AnyObject $expectedElement - defines array element structure
-     * @param null | int $min - minimum array length, null if no restrictions
-     * @param null | int $max - maximum array length, null if no restrictions
-     * @param bool $nullable - defines if array can be null
+     * @param array $options
+     * hash min - int, minimum array length
+     * hash max - int, maximum array length
+     * hash nullable - bool, defines if array can be null
      */
-    public function __construct(AnyObject $expectedElement, $min = null, $max = null, $nullable = false)
+    public function __construct(AnyObject $expectedElement, array $options = [])
     {
-        $this->min = $min;
-        $this->max = $max;
+        foreach ($options as $key => $value) {
+            $this->$key = $value;
+        }
         $this->expectedElement = $expectedElement;
-        $this->nullable = $nullable;
     }
 
     /**
