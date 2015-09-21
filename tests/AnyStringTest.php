@@ -23,6 +23,7 @@ class AnyStringTest extends PHPUnit_Framework_TestCase
             ['string', ['min' => 2, 'max' => 10]],
             [null, ['nullable' => true]],
             ['string', ['regex' => '/rin/']],
+            ['string', ['enum' => ['string', 'values']]],
         ];
     }
 
@@ -43,6 +44,7 @@ class AnyStringTest extends PHPUnit_Framework_TestCase
             ['', ['min' => 2]],
             ['stringstring', ['max' => 10]],
             ['string', ['regex' => '/grin/']],
+            ['string', ['enum' => ['one string', 'another string']]],
         ];
     }
 

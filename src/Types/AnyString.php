@@ -40,11 +40,18 @@ class AnyString implements AbstractType{
     private $nullable = false;
 
     /**
+     * defines possible string values
+     * @var array
+     */
+    private $enum = [];
+
+    /**
      * @param array $options
      * hash min - int, minimum string length
      * hash max - int, maximum string length
      * hash regex -  string,  regex pattern
      * hash nullable - boolean, defines if value can be null
+     * hash enum - array, defines possible string values
      */
     function __construct( array $options = [] )
     {
@@ -79,6 +86,10 @@ class AnyString implements AbstractType{
         } elseif ($this->regex && preg_match($this->regex, $value) !== 1) {
             $checkResult['passed'] = false;
             $checkResult['message'] = "string '$value' does not matches to pattern '$this->regex'";
+        } elseif (count($this->enum) > 0 && !in_array($value, $this->enum)) {
+            $checkResult['passed'] = false;
+            $enumAsString = implode(',', $this->enum);
+            $checkResult['message'] = "string '$value' is not in set of possible values '$enumAsString'";
         }
         return $checkResult;
     }
