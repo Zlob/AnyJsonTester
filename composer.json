@@ -1,5 +1,5 @@
 {
-  "name": "zlob/AnyJsonTester",
+  "name": "zlob/any-json-tester",
   "type": "library",
   "description": "Help to test JSON with changeable values, like timestamps, count etc",
   "keywords": [
