@@ -3,6 +3,8 @@ Trait for PhpUnit, that helps you to test JSON with changeable values, like time
 All you need - is to define structure of JSON with set of helper classes
 
 ## Installation
+via composer 
+composer require zlob/any-json-tester
 
 ## Example
 Lets test JSON like 
