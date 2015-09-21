@@ -1,8 +1,10 @@
-# AnyJsonTester [![Build Status](https://travis-ci.org/Zlob/AnyJsonTester.svg?branch=master)](https://travis-ci.org/Zlob/AnyJsonTester)
+# AnyJsonTester [![Build Status](https://travis-ci.org/Zlob/AnyJsonTester.svg?branch=master)](https://travis-ci.org/Zlob/AnyJsonTester) [![Latest Stable Version](https://poser.pugx.org/zlob/any-json-tester/v/stable)](https://packagist.org/packages/zlob/any-json-tester) [![Total Downloads](https://poser.pugx.org/zlob/any-json-tester/downloads)](https://packagist.org/packages/zlob/any-json-tester) [![License](https://poser.pugx.org/zlob/any-json-tester/license)](https://packagist.org/packages/zlob/any-json-tester)
 Trait for PhpUnit, that helps you to test JSON with changeable values, like timestamps, count etc.
 All you need - is to define structure of JSON with set of helper classes
 
 ## Installation
+via composer 
+composer require zlob/any-json-tester
 
 ## Example
 Lets test JSON like 
@@ -90,4 +92,12 @@ Lets test JSON like
     }
 ```
 
-## Some sugar for Laravel
+## Some sugar for Laravel 5.1
+In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTestertrait, so you can chain seeJsonLike method with request metods, like 
+```
+$this->post('/user', ['name' => 'Sally'])
+     ->seeJsonLike( new AnyObject( [ 'name' => AnyJsonString() ] ) );
+```
+## License
+
+MIT - [Zlob](https://github.com/zlob)
