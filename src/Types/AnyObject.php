@@ -120,7 +120,8 @@ class AnyObject implements AbstractType
                     }
                 } elseif ($actual[$expectedKey] !== $expectedValue) {
                     $checkResult['passed'] = false;
-                    $checkResult['message'] = "Unable to find value '$expectedValue' within " . json_encode($actual);
+                    $actualValue = $actual[$expectedKey];
+                    $checkResult['message'] = "Actual value '$actualValue' does not match expected value '$expectedValue' in key '$expectedKey'";
                     break;
                 }
             } else {
