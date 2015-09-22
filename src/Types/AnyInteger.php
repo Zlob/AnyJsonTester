@@ -53,7 +53,7 @@ class AnyInteger implements AbstractType{
         } elseif (!$this->nullable && $value === null) {
             $checkResult['passed'] = false;
             $checkResult['message'] = 'value is null';
-        } elseif (!filter_var($value, FILTER_VALIDATE_INT)) {
+        } elseif (filter_var($value, FILTER_VALIDATE_INT) === false) {
             $checkResult['passed'] = false;
             $checkResult['message'] = "value $value is not integer";
         } elseif ($this->min && $value < $this->min) {
