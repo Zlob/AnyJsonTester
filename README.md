@@ -101,7 +101,7 @@ $this->post('/user', ['name' => 'Sally'])
 ```
 
 ##Interface
-Trait has only one public method seeJsonLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : 'Zlob'}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, described by **AnyObject**.
+Trait has only one public method seeJsonLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : "Zlob"}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, described by **AnyObject**.
 ##Supported types
 ####AnyObject - help to test JSON objects
 #####Arguments:
