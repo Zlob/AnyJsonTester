@@ -122,7 +122,7 @@ $anyObject = new AnyObject(
             ]
       );
 ```
-####AnyArray - help to test array of JSON objects
+####AnyArray - helps to test array of JSON objects
 #####Arguments:
 * expectedElement - **AnyObject** object, that describe content of array items
 * options - array, avaible options are: 
@@ -141,7 +141,7 @@ $anyArray = new AnyArray(
             ]
       );
 ```
-####AnyString - help to test strings
+####AnyString - helps to test strings
 #####Arguments:
 * options - array, avaible options are: 
   * min - int, minimum string length
@@ -162,7 +162,7 @@ $anyString = new AnyString(
             ]
       );
 ```
-####AnyInteger - help to test integers
+####AnyInteger - helps to test integers
 #####Arguments:
 * options - array, avaible options are: 
   * min - int, minimum integer value
@@ -179,7 +179,7 @@ $anyInteger = new AnyInteger(
             ]
       );
 ```
-####AnyFloat - help to test floats
+####AnyFloat - helps to test floats
 #####Arguments:
 * options - array, avaible options are: 
   * min - int, minimum float value
@@ -198,7 +198,7 @@ $anyFloat = new AnyFloat(
             ]
       );
 ```
-####AnyDateTime - help to test date and time
+####AnyDateTime - helps to test date and time
 #####Arguments:
 * options - array, avaible options are: 
   * min - int, minimum date/time value
@@ -217,7 +217,7 @@ $anyDateTime = new AnyDateTime(
             ]
       );
 ```
-####AnyBoolean - help to test boolean
+####AnyBoolean - helps to test boolean
 #####Arguments:
 * options - array, avaible options are: 
   * strictMode - bool, if true - only 'true' and 'false' strings are boolean. Otherwise, 'true', 'false', '0', '1', 'on', 'off', 'yes' and 'no'.
