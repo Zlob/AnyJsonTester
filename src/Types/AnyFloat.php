@@ -36,7 +36,7 @@ class AnyFloat implements AbstractType
      * @param array $options
      * hash min - float, minimum float value
      * hash max - float, minimum float value
-     * hash precision - int, minimum float value
+     * hash precision - int, float precision
      * hash nullable - bool, defines if value can be null
      */
     function __construct( array $options = [] )

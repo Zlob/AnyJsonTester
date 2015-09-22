@@ -50,8 +50,9 @@ class AnyString implements AbstractType{
      * hash min - int, minimum string length
      * hash max - int, maximum string length
      * hash regex -  string,  regex pattern
-     * hash nullable - boolean, defines if value can be null
      * hash enum - array, defines possible string values
+     * hash nullable - boolean, defines if value can be null
+
      */
     function __construct( array $options = [] )
     {
