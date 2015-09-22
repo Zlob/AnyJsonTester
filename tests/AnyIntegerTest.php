@@ -17,6 +17,7 @@ class AnyIntegerTest extends PHPUnit_Framework_TestCase
     public function IntegerDataProviderPassed()
     {
         return [
+            ['0'],
             ['5'],
             ['5', ['min' => 4]],
             ['5', ['max' => 6]],
