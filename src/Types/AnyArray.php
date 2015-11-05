@@ -39,7 +39,7 @@ class AnyArray implements AbstractType
      * hash max - int, maximum array length
      * hash nullable - bool, defines if array can be null
      */
-    public function __construct(AnyObject $expectedElement, array $options = [])
+    public function __construct(AbstractType $expectedElement, array $options = [])
     {
         foreach ($options as $key => $value) {
             $this->$key = $value;

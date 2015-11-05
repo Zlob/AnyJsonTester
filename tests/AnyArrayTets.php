@@ -3,6 +3,46 @@
 class AnyArrayTest extends PHPUnit_Framework_TestCase
 {
 
+    public function testAnyArrayOfInteger()
+    {
+        $actual = [0, 1, 4, 7];
+        $expected = new \AnyJsonTester\Types\AnyArray(new \AnyJsonTester\Types\AnyInteger());
+        $checkResult = $expected->check($actual);
+        static::assertTrue($checkResult['passed'], $checkResult['message']);
+    }
+
+    public function testAnyArrayOfString()
+    {
+        $actual = ['some', 'string'];
+        $expected = new \AnyJsonTester\Types\AnyArray(new \AnyJsonTester\Types\AnyString());
+        $checkResult = $expected->check($actual);
+        static::assertTrue($checkResult['passed'], $checkResult['message']);
+    }
+
+    public function testAnyArrayOfBoolean()
+    {
+        $actual = ['true', 'false', 'true'];
+        $expected = new \AnyJsonTester\Types\AnyArray(new \AnyJsonTester\Types\AnyBoolean());
+        $checkResult = $expected->check($actual);
+        static::assertTrue($checkResult['passed'], $checkResult['message']);
+    }
+
+    public function testAnyArrayOfDateTime()
+    {
+        $actual = ['1987-12-14', '2015-08-15'];
+        $expected = new \AnyJsonTester\Types\AnyArray(new \AnyJsonTester\Types\AnyDateTime());
+        $checkResult = $expected->check($actual);
+        static::assertTrue($checkResult['passed'], $checkResult['message']);
+    }
+
+    public function testAnyArrayOfFloat()
+    {
+        $actual = [10.5, 11.3];
+        $expected = new \AnyJsonTester\Types\AnyArray(new \AnyJsonTester\Types\AnyFloat());
+        $checkResult = $expected->check($actual);
+        static::assertTrue($checkResult['passed'], $checkResult['message']);
+    }
+
     public function testAnyArrayMinPassed()
     {
         $actual = [[], []];
