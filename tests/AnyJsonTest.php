@@ -30,5 +30,27 @@ class AnyJsonTest extends PHPUnit_Framework_TestCase
         static::seeJsonLike($actualString, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), true);
     }
 
+    public function testSeeArrayLikePassed()
+    {
+        $actualArray = ['field' => 'value'];
+        $expectedArray = $actualArray;
+        static::seeArrayLike($actualArray, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), false);
+    }
+
+    public function testSeeArrayLikeUnableFindValue()
+    {
+        $actualArray = ['field' => 'value'];
+        $expectedArray = ['field' => 'faild value'];
+        static::seeArrayLike($actualArray, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), true);
+    }
+
+
+    public function testSeeArrayLikeUnableFindKey()
+    {
+        $actualArray = ['field' => 'value'];
+        $expectedArray = ['unknown field' => 'faild value'];
+        static::seeArrayLike($actualArray, new \AnyJsonTester\Types\AnyObject(['hasFields' => $expectedArray]), true);
+    }
+
 
 }

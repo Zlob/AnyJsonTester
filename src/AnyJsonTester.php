@@ -17,8 +17,20 @@ trait AnyJsonTester {
      */
     public function seeJsonLike($actual, $expected, $negate = false )
     {
-        $method = $negate ? 'assertFalse' : 'assertTrue';
         $actual = json_decode($actual, true);
+        return $this->seeArrayLike($actual, $expected, $negate);
+    }
+
+    /**
+     * Assert that array matches pattern
+     * @param string $actual
+     * @param AnyObject|AnyArray $expected
+     * @param bool $negate
+     * @return $this
+     */
+    public function seeArrayLike($actual, $expected, $negate = false)
+    {
+        $method = $negate ? 'assertFalse' : 'assertTrue';
         $checkResult = $expected->check($actual);
         $this->$method( $checkResult['passed'], $checkResult['message'] );
         return $this;

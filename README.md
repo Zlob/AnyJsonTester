@@ -1,6 +1,6 @@
 # AnyJsonTester [![Build Status](https://travis-ci.org/Zlob/AnyJsonTester.svg?branch=master)](https://travis-ci.org/Zlob/AnyJsonTester) [![Latest Stable Version](https://poser.pugx.org/zlob/any-json-tester/v/stable)](https://packagist.org/packages/zlob/any-json-tester) [![Total Downloads](https://poser.pugx.org/zlob/any-json-tester/downloads)](https://packagist.org/packages/zlob/any-json-tester) [![License](https://poser.pugx.org/zlob/any-json-tester/license)](https://packagist.org/packages/zlob/any-json-tester)
-Trait for PhpUnit, that helps you to test JSON with changeable values, like timestamps, count etc.
-All you need - is to define structure of JSON with set of helper classes
+Extension for PhpUnit, that helps you to test JSON or Array with changeable values, like timestamps, count etc. It can be very helpful if you decide to test your API.
+All you need - is to define data structure with set of helper classes.
 
 ## Installation
 via composer
@@ -92,16 +92,18 @@ Lets test JSON like
         }
     }
 ```
+## Usage
+After install, use use AnyJsonTester trait in your test class. It give you 2 methods seeJsonLike to test JSON, and seeArrayLike to test arrays.
 
 ## Some sugar for Laravel 5.1
-In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTester trait, so you can chain seeJsonLike method with request metods, like 
+In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTester trait, that will automatically retrieves data from last response, so you can chain seeJsonLike method with request method, like
 ```php
 $this->post('/user', ['name' => 'Sally'])
      ->seeJsonLike( new AnyObject( [ 'name' => AnyJsonString() ] ) );
 ```
 
 ##Interface
-Trait has only one public method seeJsonLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : "Zlob"}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, such as **AnyObject**, **AnyInteger** or even another **AnyArray**.
+Trait has only two public method seeJsonLike and seeArrayLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : "Zlob"}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, such as **AnyObject**, **AnyInteger** and etc. or even another **AnyArray**.
 ##Supported types
 ####AnyObject - help to test JSON objects
 #####Arguments:
