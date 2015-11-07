@@ -93,17 +93,17 @@ Test code:
     }
 ```
 ## Usage
-After install, use AnyJsonTester trait in your test class. It give you 2 methods seeJsonLike to test JSON, and seeArrayLike to test arrays.
+After install, use AnyJsonTester trait in your test class. It gives you two methods: seeJsonLike to test JSON, and seeArrayLike to test arrays.
 
 ## Some sugar for Laravel 5.1
-In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTester trait, that will automatically retrieves data from last response, so you can chain seeJsonLike method with request method, like
+In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTester trait, that will automatically retrieves data from response, so you can chain seeJsonLike method with request method, like
 ```php
 $this->post('/user', ['name' => 'Sally'])
      ->seeJsonLike( new AnyObject( [ 'name' => AnyJsonString() ] ) );
 ```
 
 ##Interface
-Trait has only two public method seeJsonLike and seeArrayLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : "Zlob"}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, such as **AnyObject**, **AnyInteger** and etc. or even another **AnyArray**.
+Trait has only two public methods: seeJsonLike and seeArrayLike, that takes as argument **AnyObject** or **AnyArray** object (and tested JSON string in case of non-Laravel trait). **AnyObject** is used to test JSON object like '{"name" : "Zlob"}' and can use additional types described bellow. **AnyArray** is used to test JSON array of similar objects, such as **AnyObject**, **AnyInteger** and etc. or even another **AnyArray**.
 ##Supported types
 ####AnyObject - help to test JSON objects
 #####Arguments:
