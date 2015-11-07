@@ -66,10 +66,12 @@ class AnyArray implements AbstractType
             $checkResult['message'] = "value $value is not array";
         } elseif ($this->min && count($value) < $this->min) {
             $checkResult['passed'] = false;
-            $checkResult['message'] = "array length is less then minimum value $this->min";
+            $length = count($value);
+            $checkResult['message'] = "array length $length is less then minimum value $this->min";
         } elseif ($this->max && count($value) > $this->max) {
             $checkResult['passed'] = false;
-            $checkResult['message'] = "array length is greater then maximum value $this->max";
+            $length = count($value);
+            $checkResult['message'] = "array length $length is greater then maximum value $this->max";
         } else {
             $result = $this->checkArray($value, $checkResult);
             if (!$result['passed']) {

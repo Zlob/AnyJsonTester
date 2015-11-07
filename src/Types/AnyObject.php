@@ -116,6 +116,7 @@ class AnyObject implements AbstractType
                 if (is_object($expectedValue)) {
                     $checkResult = $expectedValue->check($actual[$expectedKey]);
                     if (!$checkResult['passed']) {
+                        $checkResult['message'] .= " in key '$expectedKey'";
                         break;
                     }
                 } elseif ($actual[$expectedKey] !== $expectedValue) {
