@@ -93,7 +93,7 @@ Lets test JSON like
     }
 ```
 ## Usage
-After install, use use AnyJsonTester trait in your test class. It give you 2 methods seeJsonLike to test JSON, and seeArrayLike to test arrays.
+After install, use AnyJsonTester trait in your test class. It give you 2 methods seeJsonLike to test JSON, and seeArrayLike to test arrays.
 
 ## Some sugar for Laravel 5.1
 In my favorite framework, you can use AnyJsonTesterLaravel trait instead of AnyJsonTester trait, that will automatically retrieves data from last response, so you can chain seeJsonLike method with request method, like
