@@ -33,7 +33,7 @@ class AnyArray implements AbstractType
     private $nullable = false;
 
     /**
-     * @param AnyObject $expectedElement - defines array element structure
+     * @param AbstractType $expectedElement - defines array element structure
      * @param array $options
      * hash min - int, minimum array length
      * hash max - int, maximum array length
